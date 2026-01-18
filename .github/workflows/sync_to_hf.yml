@@ -1,0 +1,24 @@
+name: Sync to Hugging Face Hub
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync-to-hub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          lfs: true # Needed if you use Git LFS for large files
+
+      - name: Push to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_USERNAME: Aboudougafar
+          SPACE_NAME: ames-housing-predictor
+        run: |
+          git remote add space https://$HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/$HF_USERNAME/$SPACE_NAME
+          git push --force space main # Overwrites Space's main branch with GitHub's

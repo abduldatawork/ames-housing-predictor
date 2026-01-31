@@ -1,5 +1,5 @@
 ---
-title: Ames Housin Predictor
+title: Ames Housing Predictor
 emoji: 🏠
 colorFrom: blue
 colorTo: green
